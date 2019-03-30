@@ -1,6 +1,12 @@
 import java.util.ArrayDeque;
 import java.util.Scanner;
 
+/**
+ * @author Zac Mason
+ * @version 3/29/19
+ * Referenced https://www.geeksforgeeks.org/stack-set-4-evaluation-postfix-expression/
+ * for while loop to evaluate multi digit expressions
+ */
 
 public class Postfix {
 
@@ -22,7 +28,7 @@ public class Postfix {
             if (curChar != ' ') {
                 if (Character.isDigit(curChar)) {
                     int myVal = 0;
-                    while (Character.isDigit(curChar)) {
+                    while (Character.isDigit(curChar)) { // used source as reference
                         myVal = myVal * 10 + curChar - '0';
                         i++;
                         curChar = input.charAt(i);
@@ -32,8 +38,8 @@ public class Postfix {
                 }
                  else {
                     char operator = curChar;
-                    int num2 = Integer.parseInt(String.valueOf(stack.pop()));
-                    int num1 = Integer.parseInt(String.valueOf(stack.pop()));
+                    int num2 = stack.pop();
+                    int num1 = stack.pop();
                     if (operator == '+') {
                         int sum = num1 + num2;
                         stack.push(sum);
