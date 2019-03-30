@@ -12,18 +12,25 @@ public class Postfix {
 
     public void run() {
 
-        ArrayDeque stack = new ArrayDeque();
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
 
         System.out.println("Enter an expression in postfix notation, using a space to separate characters.");
         String input = in.nextLine();
 
         for (int i = 0; i < input.length(); i++) {
             char curChar = input.charAt(i);
-            if (input.charAt(i) != ' ') {
+            if (curChar != ' ') {
                 if (Character.isDigit(curChar)) {
-                    stack.push(curChar);
+                    int myVal = 0;
+                    while (Character.isDigit(curChar)) {
+                        myVal = myVal * 10 + curChar - '0';
+                        i++;
+                        curChar = input.charAt(i);
+                    }
+                    i--;
+                    stack.push(myVal);
                 }
-                else if (curChar == '+' || curChar == '-' || curChar == '*' || curChar == '/') {
+                 else {
                     char operator = curChar;
                     int num2 = Integer.parseInt(String.valueOf(stack.pop()));
                     int num1 = Integer.parseInt(String.valueOf(stack.pop()));
